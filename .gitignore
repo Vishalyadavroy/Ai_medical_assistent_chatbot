@@ -1,0 +1,63 @@
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+.eggs/
+
+# =========================
+# Virtual Environment
+# =========================
+venv/
+.env/
+.env.*
+.python-version
+
+# =========================
+# FastAPI / Uvicorn
+# =========================
+*.log
+uvicorn.log
+
+# =========================
+# IDE / Editor
+# =========================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# =========================
+# OS files
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# MongoDB / Database
+# =========================
+data/
+mongo-data/
+
+# =========================
+# Frontend (if applicable)
+# =========================
+node_modules/
+dist/
+build/
+
+# =========================
+# Test / Coverage
+# =========================
+.coverage
+htmlcov/
+.pytest_cache/
+
+# =========================
+# Misc
+# =========================
+*.sqlite3
