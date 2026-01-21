@@ -21,3 +21,5 @@ except Exception as e:
 db = client["Ai_chatboat"]
 session_collection =db["sessions"]
 chat_collection = db["chats"]
+soap_collection = db["soap_reports"]
+

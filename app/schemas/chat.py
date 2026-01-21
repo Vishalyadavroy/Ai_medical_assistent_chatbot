@@ -25,3 +25,8 @@ class ChatHistoryResponse(BaseModel):
     user_id: str
     conversation_id: str
     messages: List[ChatMessage]
+
+
+class SOAPResponse(BaseModel):
+    soap_report:str
+    disclaimer:str

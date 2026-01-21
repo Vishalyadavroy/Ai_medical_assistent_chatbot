@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Medical AI Assistant</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+
+<div class="container">
+    <h2>🩺 Medical AI Assistant</h2>
+
+    <p class="disclaimer">
+         This AI provides general medical information only.
+        It is not a substitute for professional medical advice.
+    </p>
+
+    <div id="chat-box"></div>
+
+    <div class="input-area">
+        <button onclick="startNewChat()" class="new-chat">🆕 New Chat</button>
+        <button onclick="loadChatHistory()" class="history-btn"> Load History</button>
+
+        <input
+            type="text"
+            id="message"
+            placeholder="Ask a medical question..."
+            autocomplete="off"
+        />
+        <button onclick="sendMessage()">Send</button>
+    </div>
+
+    <div style="margin-top:10px; text-align:center;">
+        <button onclick="generateSOAPReport()" class="soap-btn">
+             Generate SOAP Report
+        </button>
+    </div>
+</div>
+
+<script src="../static/chat.js"></script>
+</body>
+</html>

@@ -1,6 +1,9 @@
-from fastapi import FastAPI
+from fastapi import FastAPI ,Request
 from app.routes.chat import router as chat_router
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
+
 app = FastAPI(
     title="AI Chatbot",
     description="AI-power chatbot API",
@@ -18,3 +21,11 @@ app.add_middleware(
 
 
 app.include_router(chat_router)
+
+
+templates =Jinja2Templates(directory="app/templates")
+app.mount("/static", StaticFiles(directory="app/static"), name="static")
+
+@app.get("/")
+def chat_ui(request:Request):
+    return templates.TemplateResponse("chat.html",{"request":request})

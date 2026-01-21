@@ -21,10 +21,18 @@ def generate_medical_response(user_message: str) -> str:
     response = client.chat.completions.create(
         model="gpt-3.5-turbo-1106",
         messages=[
-            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "system", "content":SYSTEM_PROMPT},
             {"role": "user", "content": user_message}
         ],
         temperature=0.4
     )
 
     return response.choices[0].message.content
+
+def ai_generate_soap(chat_text: str):
+    return {
+        "subjective": "Patient reports symptoms mentioned in chat.",
+        "objective": "Based on user-described symptoms only.",
+        "assessment": "Possible general causes (no diagnosis).",
+        "plan": "General advice, rest, hydration, consult doctor."
+    }
