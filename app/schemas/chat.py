@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 from datetime import datetime
 from typing import List
+from typing import Dict, Any
 
 class ChatRequest(BaseModel):
     message: str
@@ -27,6 +28,18 @@ class ChatHistoryResponse(BaseModel):
     messages: List[ChatMessage]
 
 
+# class SOAPResponse(BaseModel):
+#     soap_report: Dict[str, Any]
+#     disclaimer:str
+
+
+class SOAPData(BaseModel):
+    subjective: str
+    objective: str
+    assessment: str
+    plan: str
+
+
 class SOAPResponse(BaseModel):
-    soap_report:str
-    disclaimer:str
+    soap_report: SOAPData
+    disclaimer: str

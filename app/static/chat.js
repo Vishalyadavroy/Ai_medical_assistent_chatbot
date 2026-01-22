@@ -198,20 +198,92 @@ async function loadChatHistory() {
 ========================= */
 async function generateSOAPReport() {
     try {
-        const res = await fetch("/chatbot/chat/soap", {
+        const res = await fetch("/chatbot/soap", {
             method: "GET",
             credentials: "include"
         });
 
-        const data = await res.json();
-        alert("SOAP Report:\n\n" + data.report);
+        const rawText = await res.text();
+        console.log("SOAP RAW:", rawText);
 
-    } catch {
-        alert("Failed to generate SOAP report.");
+        let data;
+        try {
+            data = JSON.parse(rawText);
+        } catch {
+            renderSOAPMessage(rawText);
+            return;
+        }
+
+        // ✅ FIX: handle backend key "soap_report"
+        const report =
+            data.soap_report ??
+            data.report ??
+            data.soap ??
+            data.data ??
+            data;
+
+        console.log("SOAP FINAL:", report);
+
+        renderSOAPMessage(report);
+
+    } catch (err) {
+        console.error(err);
+        addAIMessage("Failed to generate SOAP report.");
     }
 }
+
 
 /* =========================
    INIT ON PAGE LOAD
 ========================= */
 window.onload = initChat;
+
+
+function renderSOAPMessage(report) {
+    const chatBox = document.getElementById("chat-box");
+
+    const wrapper = document.createElement("div");
+    wrapper.className = "soap-card";
+
+    let html = `<div class="soap-title">SOAP Report</div>`;
+
+    if (!report) {
+        html += `<div>No SOAP data available.</div>`;
+    }
+    else if (typeof report === "object") {
+        html += `
+            <div class="soap-section">
+                <span>Subjective</span>
+                ${report.subjective || "-"}
+            </div>
+            <div class="soap-section">
+                <span>Objective</span>
+                ${report.objective || "-"}
+            </div>
+            <div class="soap-section">
+                <span>Assessment</span>
+                ${report.assessment || "-"}
+            </div>
+            <div class="soap-section">
+                <span>Plan</span>
+                ${report.plan || "-"}
+            </div>
+        `;
+    } else {
+        html += `<div>${report}</div>`;
+    }
+
+    wrapper.innerHTML = html;
+    chatBox.appendChild(wrapper);
+    chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+
+function addAIMessage(message) {
+    const chatBox = document.getElementById("chat-box");
+    const msg = document.createElement("div");
+    msg.className = "ai-message";
+    msg.textContent = message;
+    chatBox.appendChild(msg);
+    chatBox.scrollTop = chatBox.scrollHeight;
+}
