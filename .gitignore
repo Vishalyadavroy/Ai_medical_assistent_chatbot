@@ -12,12 +12,10 @@ __pycache__/
 # =========================
 # Virtual Environment
 # =========================
-venv/
-.env/
-.env.*
+.env
 .python-version
 
-.venv
+ venv
 # =========================
 # FastAPI / Uvicorn
 # =========================
